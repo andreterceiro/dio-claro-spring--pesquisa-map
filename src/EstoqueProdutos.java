@@ -73,4 +73,42 @@ public class EstoqueProdutos {
         }
         return produtoMaisCaro;
     }
+
+    /**
+     * Method that help us in the task of generate a string that represents an
+     * object of this class
+     */
+    public String toString() {
+        String ret = "{EstoqueProduto: [";
+        if (estoqueProdutosMap.size() == 0) {
+            return ret + "]}";
+        }
+        for (Produto produto: this.estoqueProdutosMap.values()) {
+            ret += "nome: " + produto.getNome() + ", preço: " +  produto.getPreco() + ", quantidade: " +  produto.getQuantidade() + "; ";
+        }
+        return ret.substring(0, ret.length() - 2) + "]}";
+    }
+
+    /**
+     * Main method to manual tests
+     *
+     * @param args Arguments, normally passed through CLI (ignored)
+     */
+    public static void main(String[] args) {
+        EstoqueProdutos estoqueProdutos = new EstoqueProdutos();
+        System.out.println(estoqueProdutos);
+
+        estoqueProdutos.adicionarProduto(1, "bala", 0.1, 100);
+        estoqueProdutos.adicionarProduto(2, "pirulito", 0.5, 50);
+        estoqueProdutos.adicionarProduto(3, "chiclete", 0.2, 70);
+        System.out.println(estoqueProdutos);
+
+        // The data of one product will be updated
+        estoqueProdutos.adicionarProduto(3, "gelinho", 1.5, 10);
+        estoqueProdutos.exibirProdutos();
+
+        System.out.println("O valor total do estoque é: " + estoqueProdutos.calcularValorTotalEstoque());
+
+        System.out.println("O produto mais caro do estoque é: " + estoqueProdutos.obterProdutoMaisCaro());
+    }
 }
